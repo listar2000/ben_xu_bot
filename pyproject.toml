@@ -10,6 +10,7 @@ packages = [{include = "ben_xu_bot"}]
 python = "^3.9"
 discord-py = "^2.1.1"
 python-dotenv = "^0.21.1"
+ratelimit = "^2.2.1"
 
 
 [build-system]
