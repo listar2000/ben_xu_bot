@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 import os
 
-load_dotenv("../.env")
+load_dotenv()
 
 DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
 
