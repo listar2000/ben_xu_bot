@@ -18,3 +18,9 @@ GUILDS = [
     988607878527070248,
     530583657342173202
 ]
+
+# a bunch of gist_ids for data IO access
+GIST_IDS = {
+    "trigger_words.json": "5b70f6b65aa7665ee981a19d64110ab6",
+    "users.json": "0f2edff18c96f3464f97c5e2270ffee6"
+}
