@@ -1,11 +1,9 @@
 from constants import STREAM_TRACK_IDS, GENERAL_CHANNEL, GUILDS
-from dotenv import load_dotenv
-from responses import handle_bili_response
+from responses import handle_bili_response, handle_custom_responses, create_bili_response
 import discord
 from discord.ext import commands
 import os
 
-load_dotenv()
 
 DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
 
@@ -30,10 +28,19 @@ def run_ben_xu_bot():
 
         speaker = str(message.author)
         u_message = str(message.content)
+        channel_id = message.channel.id
 
-        response = handle_bili_response(u_message, speaker, message.channel.id)
-        if response:
-            await message.channel.send(response)
+        if u_message.startswith("!bili"):
+            create_resp = await create_bili_response(u_message, speaker, channel_id)
+            await message.channel.send(create_resp)
+            return
+        bili_resp = await handle_bili_response(u_message, speaker, channel_id)
+        if bili_resp:
+            await message.channel.send(bili_resp)
+        else:
+            custom_resp = await handle_custom_responses(u_message, speaker, channel_id)
+            if custom_resp:
+                await message.channel.send(custom_resp)
 
     @bot.event
     async def on_voice_state_update(member, before, after):
